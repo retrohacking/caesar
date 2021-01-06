@@ -1,17 +1,19 @@
 import sys
 import string
 
-if len(sys.argv)!=4:
-	sys.exit ("Usage\n\t"+ sys.argv[0]+" <add/sub> <index> <string>\n")
+if len (sys.argv)!=3 and len(sys.argv)!=4:
+	sys.exit ("Usage\n\t"+ sys.argv[0]+" <add/sub> <index> <string>\nor\n\t"+sys.argv[0]+ " c <string>\n")
+
 
 op=sys.argv[1]
 
-if sys.argv[2].isnumeric():
-	index=int(sys.argv[2])
-else:
-	sys.exit("Usage\n\t"+ sys.argv[0]+" <add/sub> <index> <string>\n\tUse a numeric index\n")
+if (sys.argv[1]=="sub" or sys.argv[1]=="add"):
+	if sys.argv[2].isnumeric():
+		index=int(sys.argv[2])
+	else:
+		sys.exit("Usage\n\t"+ sys.argv[0]+" <add/sub> <index> <string>\n\tUse a numeric index\n")
 
-text=sys.argv[3]
+text=""
 
 def add():
 	new_string=""
@@ -29,7 +31,7 @@ def add():
 			if string.ascii_uppercase.index(char)+index%26>25:
 				new_string+=string.ascii_uppercase[string.ascii_uppercase.index(char)-26+index%26]
 			else: new_string+=string.ascii_uppercase[string.ascii_uppercase.index(char)+index%26]
-	sys.exit(new_string)
+	print(new_string)
 
 
 def sub():
@@ -50,14 +52,25 @@ def sub():
 			if string.ascii_uppercase.index(char)-index%26<0:
 				new_string+=string.ascii_uppercase[string.ascii_uppercase.index(char)-index%26+26]
 			else: new_string+=string.ascii_uppercase[string.ascii_uppercase.index(char)-index%26]
-	sys.exit(new_string)
+	print(new_string)
+
+
 
 if (sys.argv[1]=="add"):
+	text=sys.argv[3]
 	add()
+	sys.exit()
 
 if (sys.argv[1]=="sub"):
+	text=sys.argv[3]
 	sub()
+	sys.exit()
 
-sys.exit ("Usage\n\t"+ sys.argv[0]+" <add/sub> <index> <string>\n")
+if (sys.argv[1]=="c"):
+	text=sys.argv[2]
+	for i in range (1,27):
+		index=i
+		add()
 
-
+	sys.exit()
+sys.exit ("Usage\n\t"+ sys.argv[0]+" <add/sub> <index> <string>\nor\n\t"+sys.argv[0]+ " c <string>\n")
