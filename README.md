@@ -10,6 +10,6 @@ python3 caesar.py c < string >
 # index:
   it simply represents the shift to be applied.
 # c:
-print the string shifted by any letter of the alphabet
+print the string shifted by each letter of the alphabet
 
 No particular requirements needed.
